@@ -131,8 +131,8 @@ int main()
 	//repeated_encryption_ReLU();
 	//test_two_crt();
 	//conv1_nn();
-	//nn_2conv();
-	inference();
+	nn_2conv();
+	//inference();
 	return 0;
 }
 

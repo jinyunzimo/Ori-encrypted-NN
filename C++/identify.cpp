@@ -6,7 +6,7 @@ void identify_num(vector<vector<int64_t>> result, vector<int64_t> target)
 {
 	// the file reacord the identificated number
 	ofstream result_num_indentified;
-	result_num_indentified.open("result_num_indentified.csv", ios::out);
+	result_num_indentified.open("result/result_num_indentified.csv", ios::out);
 	// the number of pictures which is identified correctly
 	int num_right = 0;
 	// Parallel the process of identification of numbers

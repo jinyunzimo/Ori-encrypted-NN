@@ -1,0 +1,84 @@
+20230219 01:40:40
+
+
+Total memory allocated by global memory pool: 0 MB
+
+Done [757621 microseconds]
+Done [1567771 microseconds]
+Total memory allocated by global memory pool: 304 MB
+Done [408904 microseconds]
+Total memory allocated by global memory pool: 415 MB
+Done [38366 microseconds]
+Total memory allocated by global memory pool: 423 MB
+Done [3815701 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Done [46954 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Total memory allocated by global memory pool: 503 MB
+Done [45206 microseconds]
+Total memory allocated by global memory pool: 523 MB
+Done [68452 microseconds]
+Total memory allocated by global memory pool: 523 MB
+Done [9527 microseconds]
+encoding and encryption [757621 microseconds]
+inference [4726841 microseconds]
+decryption and decoding [9527 microseconds]
+relu [454110 microseconds]
+
+Total memory allocated by global memory pool: 523 MB
+20230219 01:47:20
+
+
+Total memory allocated by global memory pool: 0 MB
+
+Done [738041 microseconds]
+Done [1544970 microseconds]
+Total memory allocated by global memory pool: 304 MB
+Done [418083 microseconds]
+Total memory allocated by global memory pool: 415 MB
+Done [32869 microseconds]
+Total memory allocated by global memory pool: 423 MB
+Done [3789330 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Done [49479 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Total memory allocated by global memory pool: 503 MB
+Done [40882 microseconds]
+Total memory allocated by global memory pool: 523 MB
+Done [70264 microseconds]
+Total memory allocated by global memory pool: 523 MB
+Done [8888 microseconds]
+encoding and encryption [738041 microseconds]
+inference [4656801 microseconds]
+decryption and decoding [8888 microseconds]
+relu [458965 microseconds]
+
+Total memory allocated by global memory pool: 523 MB
+20230219 01:59:12
+
+
+Total memory allocated by global memory pool: 0 MB
+
+Done [646769 microseconds]
+Done [1622384 microseconds]
+Total memory allocated by global memory pool: 304 MB
+Done [471310 microseconds]
+Total memory allocated by global memory pool: 416 MB
+Done [29423 microseconds]
+Total memory allocated by global memory pool: 423 MB
+Done [3820600 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Done [43998 microseconds]
+Total memory allocated by global memory pool: 503 MB
+Total memory allocated by global memory pool: 503 MB
+Done [48707 microseconds]
+Total memory allocated by global memory pool: 522 MB
+Done [68183 microseconds]
+Total memory allocated by global memory pool: 522 MB
+Done [8657 microseconds]
+encoding and encryption [646769 microseconds]
+inference [4839864 microseconds]
+decryption and decoding [8657 microseconds]
+relu [520017 microseconds]
+
+Total memory allocated by global memory pool: 522 MB

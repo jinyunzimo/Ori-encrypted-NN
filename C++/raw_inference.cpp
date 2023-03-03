@@ -58,7 +58,7 @@ void inference()
 	ofstream outfile;
 	time_t a_time_start = time(0);
 	char log_file_name[64];
-	strftime(log_file_name, sizeof(log_file_name), "result\raw_two_crt_%Y%m%d_result.txt", localtime(&a_time_start));
+	strftime(log_file_name, sizeof(log_file_name), "result/raw_two_crt_%Y%m%d_result.txt", localtime(&a_time_start));
 	cout << log_file_name << endl;
 
 	// open the outfile
@@ -72,9 +72,9 @@ void inference()
 	// read the images and labels of the test set
 	print_banner("Read test images and labels", '*');
 	vector<int64_t>labels;
-	read_Mnist_Label("t10k-labels.idx1-ubyte", labels);
+	read_Mnist_Label("MINIST/t10k-labels.idx1-ubyte", labels);
 	vector<vector<int64_t>> images;
-	read_Mnist_Images("t10k-images.idx3-ubyte", images);
+	read_Mnist_Images("MINIST/t10k-images.idx3-ubyte", images);
 	print_banner("Finish reading images and labels", '#');
 	cout << endl;
 	// end reading
@@ -86,6 +86,13 @@ void inference()
 	print_banner("Finish reading model weights", '#');
 	cout << endl;
 	// end
+
+
+	// time of inference
+	chrono::microseconds time_inference(0);
+
+	chrono::high_resolution_clock::time_point time_start, time_end;
+	time_start = chrono::high_resolution_clock::now();
 
 	int kernel_stride[2] = { 2,2 };
 	vector<vector<int64_t>> results;
@@ -155,5 +162,12 @@ void inference()
 		//write_to_csv("raw_fc2_" + to_string(rand_int) + ".csv", fc2_image);
 		results.push_back(fc2_image);		
 	}
+
+	time_end = chrono::high_resolution_clock::now();
+	// record the interval between encoding and encryption(us)
+	auto time_diff = chrono::duration_cast<chrono::microseconds>(time_end - time_start);
+	time_inference += time_diff;
+	cout << "inference [" << time_inference.count() << " microseconds]" << endl;
+
 	identify_num(results, labels);
 }

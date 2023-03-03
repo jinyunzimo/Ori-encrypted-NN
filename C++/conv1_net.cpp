@@ -32,9 +32,9 @@ void conv1_nn()
 	// read the images and labels of the test set
 	print_banner("Read test images and labels", '*');
 	vector<int64_t>labels;
-	read_Mnist_Label("t10k-labels.idx1-ubyte", labels);
+	read_Mnist_Label("MINIST/t10k-labels.idx1-ubyte", labels);
 	vector<vector<int64_t>> images;
-	read_Mnist_Images("t10k-images.idx3-ubyte", images);
+	read_Mnist_Images("MINIST/t10k-images.idx3-ubyte", images);
 	print_banner("Finish reading images and labels", '#');
 	// end reading
 

@@ -29,9 +29,9 @@ void nn_2conv()
 	// read the images and labels of the test set
 	print_banner("Read test images and labels", '*');
 	vector<int64_t>labels;
-	read_Mnist_Label("t10k-labels.idx1-ubyte", labels);
+	read_Mnist_Label("MINIST/t10k-labels.idx1-ubyte", labels);
 	vector<vector<int64_t>> images;
-	read_Mnist_Images("t10k-images.idx3-ubyte", images);
+	read_Mnist_Images("MINIST/t10k-images.idx3-ubyte", images);
 	print_banner("Finish reading images and labels", '#');
 	cout << endl;
 	// end reading
@@ -48,7 +48,7 @@ void nn_2conv()
 	print_banner("Set encryption parameters", '*');
 
 	EncryptionParameters parms1;
-	parms1.set_poly_modulus("1x^2048 + 1");
+	parms1.set_poly_modulus("1x^1024 + 1");
 	parms1.set_coeff_modulus(coeff_modulus_192(8192));
 	parms1.set_plain_modulus(1099512004609);
 	// parms1.set_plain_modulus(10000000999464961);
@@ -112,7 +112,7 @@ void nn_2conv()
 	vector<vector<int64_t>> test_images;
 
 	// First import slot_size test images 
-	for (int i = 0; i < crtbuilder.slot_count(); i++)
+	for (int i = 0; i < slot_count; i++)
 	{
 		test_images.push_back(images[i]);
 	}
@@ -172,7 +172,7 @@ void nn_2conv()
 	cout << endl;
 	// end 1st conv
 
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv1_image, "conv1_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv1_image, "result/conv1_" + to_string(rand_int) + ".csv");
 
 	// activiating
 	print_banner("activating...", '*');
@@ -192,7 +192,7 @@ void nn_2conv()
 	cout << endl;
 	// end 1st act
 	// decrypt_re_encrypt(decryptor, crtbuilder, encryptor, result_conv1_image);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv1_image, "act1_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv1_image, "result/act1_" + to_string(rand_int) + ".csv");
 
 	/// pooling
 	// pooling size
@@ -233,12 +233,13 @@ void nn_2conv()
 	print_banner("Finishing the first pool", '#');
 	cout << endl;
 
-	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool1_image, "raw_pool1_" + to_string(rand_int) + ".csv");
+	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool1_image, "result/raw_pool1_" + to_string(rand_int) + ".csv");
 	//decrypt_re_encrypt(decryptor, crtbuilder, encryptor, result_pool1_image);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool1_image, "pool1_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool1_image, "result/pool1_" + to_string(rand_int) + ".csv");
 
 	cout << "Noise budget in fresh encryption: "
 		<< decryptor.invariant_noise_budget(result_pool1_image[0][0]) << " bits" << endl;
+
 
 	// the second convolution
 	print_banner("the second conv...", '*');
@@ -264,7 +265,7 @@ void nn_2conv()
 	print_banner("Finishing the second conv", '#');
 	cout << endl;
 
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv2_image, "conv2_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_conv2_image, "result/conv2_" + to_string(rand_int) + ".csv");
 
 
 	cout << "Noise budget in fresh encryption: "
@@ -293,9 +294,9 @@ void nn_2conv()
 	print_banner("Finishing the second pool", '#');
 	cout << endl;
 
-	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool2_image, "raw_pool2_" + to_string(rand_int) + ".csv");
+	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool2_image, "result/raw_pool2_" + to_string(rand_int) + ".csv");
 	//decrypt_re_encrypt(decryptor, crtbuilder, encryptor, result_pool2_image);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool2_image, "pool2_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_pool2_image, "result/pool2_" + to_string(rand_int) + ".csv");
 
 	// flatten
 	time_start = chrono::high_resolution_clock::now();
@@ -326,9 +327,9 @@ void nn_2conv()
 	print_banner("end", '#');
 	cout << endl;
 
-	//decrpt_middle_result_no_ops(decryptor, crtbuilder, flat_result_pool2, "raw_flat_" + to_string(rand_int) + ".csv");
+	//decrpt_middle_result_no_ops(decryptor, crtbuilder, flat_result_pool2, "result/raw_flat_" + to_string(rand_int) + ".csv");
 	//decrypt_re_encrypt(decryptor, crtbuilder, encryptor, flat_result_pool2);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, flat_result_pool2, "flat_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, flat_result_pool2, "result/flat_" + to_string(rand_int) + ".csv");
 
 	// the first fully connection layer
 	print_banner("the first fc", '*');
@@ -349,7 +350,7 @@ void nn_2conv()
 	cout << endl;
 
 	//decrypt_re_encrypt(decryptor, crtbuilder, encryptor, result_fc1);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "fc1_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "result/fc1_" + to_string(rand_int) + ".csv");
 
 	cout << "Noise budget in fresh encryption: "
 		<< decryptor.invariant_noise_budget(result_fc1[0]) << " bits" << endl;
@@ -371,9 +372,9 @@ void nn_2conv()
 	print_banner("Finish the first FC", '#');
 	cout << endl;
 
-	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "raw_sq2_" + to_string(rand_int) + ".csv");
+	//decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "result/raw_sq2_" + to_string(rand_int) + ".csv");
 	//decrypt_re_encrypt(decryptor, crtbuilder, encryptor, result_fc1);
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "sq2_" + to_string(rand_int) + ".csv");
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc1, "result/sq2_" + to_string(rand_int) + ".csv");
 
 	cout << "Noise budget in fresh encryption: "
 		<< decryptor.invariant_noise_budget(result_fc1[0]) << " bits" << endl;
@@ -405,7 +406,8 @@ void nn_2conv()
 	// result of 2nd fc, shaped as [num_images, 10]
 	vector<vector<int64_t>> fc2_middel_results;
 	// decrypt the result
-	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc2, "fc2_" + to_string(rand_int) + ".csv", fc2_middel_results);
+	decrpt_middle_result_no_ops(decryptor, crtbuilder, result_fc2, "result/fc2_" + to_string(rand_int) + ".csv", fc2_middel_results);
+
 	time_end = chrono::high_resolution_clock::now();
 	time_diff = chrono::duration_cast<chrono::microseconds>(time_end - time_start);
 	time_decryption_decoding += time_diff;
@@ -420,11 +422,14 @@ void nn_2conv()
 	cout << "inference [" << time_inference.count() << " microseconds]" << endl;
 	cout << "decryption and decoding [" << time_decryption_decoding.count() << " microseconds]" << endl;
 	cout << "relu [" << time_square.count() << " microseconds]" << endl;
+	cout << "total [" << time_encoding_encryption.count()+ time_inference.count()+time_decryption_decoding.count() +time_square.count() << " microseconds]" << endl;
+
 
 	outfile << "encoding and encryption [" << time_encoding_encryption.count() << " microseconds]" << endl;
 	outfile << "inference [" << time_inference.count() << " microseconds]" << endl;
 	outfile << "decryption and decoding [" << time_decryption_decoding.count() << " microseconds]" << endl;
 	outfile << "relu [" << time_square.count() << " microseconds]" << endl;
+	outfile << "total [" << time_encoding_encryption.count() + time_inference.count() + time_decryption_decoding.count() + time_square.count() << " microseconds]" << endl;
 	print_banner("finishing summarizing", '#');
 	cout << endl;
 
